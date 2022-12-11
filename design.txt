@@ -1,0 +1,31 @@
+For the game design, I break it down to several parts:
+    1. Splash screen.
+       (1) Present the splash image for two seconds.
+       (2) Then dialog prompts come out to ask for your name and maximum steps.
+    2. Place elements properly in terms of size.
+       (1) Button area
+       Quit button is 80 * 50, load is 80 * 75, reset is a circle with a radius of 35.
+       In addition, the reminder of moving steps is placed at the left side of the area.
+       So I draw a rectangle with 150 in height, 645 in width at bottom(keep align with two other areas).
+       (2) tiles area
+       Each tile is 98 * 98, so I drew a 410 * 410 square to make sure it would be able to place 16 tiles.
+       (3) leader board
+       I randomly put some names inside the leader.txt and present them in the leaderboard.
+       At the upper right corner is the thumbnail.
+    3. Run game.
+       (1) Default game is Mario and also it is shuffled. I created a function called shuffle() and it would be used
+           at the beginning of the game or when you load a new game. It wouldn't be used when you reset the current game,
+           tiles presented after reset is ordered.
+       (2) Find the blank tile and store its index and position.
+           Inside each puzzle set, search for the key whose value includes the string of "blank" inside.
+       (3) Differentiate different kinds of clicks.
+           i. Button clicks. Clicks fall in the areas of each button and then perform corresponding operations.
+              reset: present ordered tiles.
+              load: load another game the user chooses. Show warning if it is nonexistent or malformed.
+              quit: show quit reminder and end the game.
+           ii. Tile clicks. Clicks fall in the slides area and it is adjacent to the blank tile.
+       (4) Track number of clicks.
+           Counter would add up 1 when it is a valid click(adjacent to the blank tile).
+           If the user clicks more than maximum steps, he/she loses, show the reminder, then end.
+           If he/she unscrambles the puzzle with steps less than the maximum one, he/she wins the game, shows the reminder, then ends.
+           In the meantime, reset and load buttons mean count from 0 again.
